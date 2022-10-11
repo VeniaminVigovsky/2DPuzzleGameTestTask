@@ -33,6 +33,7 @@ public class AbstractCellController : ICellController
         if (squareView != null)
         {
             var squareController = squareView.SquareController;
+            if (squareController == null || squareController.IsLocked) return;
             SquareDropped?.Invoke(this, squareController);
         }
     }

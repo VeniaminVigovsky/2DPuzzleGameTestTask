@@ -8,7 +8,9 @@ public interface ISquareController
 {
     event Action<ISquareController> SquareDragEnded;
 
-    event Action<ISquareController, ICellController> CellChanged;    
+    event Action<ISquareController, ICellController> CellChanged;
+
+    bool IsLocked { get; }
 
     void OnBeginDrag(PointerEventData eventData);
 

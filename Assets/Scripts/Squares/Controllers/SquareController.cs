@@ -11,6 +11,8 @@ public class SquareController : ISquareController
     public event Action<ISquareController> SquareDragEnded;
     public event Action<ISquareController, ICellController> CellChanged;
 
+    public bool IsLocked => _isLocked;
+
     private RectTransform _selfT;
     private Image _squareImage;
 
@@ -54,7 +56,7 @@ public class SquareController : ISquareController
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        _canvasGroup.blocksRaycasts = true;
+        _canvasGroup.blocksRaycasts = true;        
 
         SquareDragEnded?.Invoke(this);
     }
@@ -82,7 +84,7 @@ public class SquareController : ISquareController
     public void TryAssignToCell(ICellController cell)
     {
         if (cell == null ||            
-            cell.RectTransform == null) return;
+            cell.RectTransform == null || _isLocked) return;        
 
         CellChanged?.Invoke(this, cell);
     }
